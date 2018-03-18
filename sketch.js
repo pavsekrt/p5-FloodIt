@@ -11,6 +11,10 @@ function setup() {
       blocks[x][y] = [Math.random(), Math.random(),Math.random()];
     }    
   }
+}
+
+function draw() {
+  setCanvasSize();
   createCanvas(w * scale, h * scale);
   for (let x = 0; x < w; x++) {
     for (let y = 0; y < h; y++) {
@@ -20,9 +24,6 @@ function setup() {
       rect(x * scale, y * scale, scale, scale);
     }    
   }
-}
-
-function draw() {
 
 }
 
