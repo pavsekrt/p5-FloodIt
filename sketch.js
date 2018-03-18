@@ -3,7 +3,7 @@ const w = h = 25; //number of blocks
 let scale = 15; //default scale of blocks on canvas (overwritten in setCanvasSize())
 let blocks = []; //blocks in canvas
 let colors = [[]];  //colors used
-const colorsNum = 10; //number of colors used
+const colorsNum = 6; //number of colors used
 let userColor = 0; //default color of user
 
 /* Base functions */
@@ -28,7 +28,6 @@ function setCanvasSize() {
 /* User input related functions */
 function mouseReleased() { //p5 Function
   searchBlocks(locToColor(mouseX, mouseY));
-
 }
 
 /* Block related functions */
@@ -65,5 +64,18 @@ function locToColor(x, y) {
 /* Logic related functions */
 
 function searchBlocks(selectedColor) {
-  console.log(selectedColor);
+  compareAdjacentBlocks(selectedColor, 0, 0);
+  userColor = selectedColor;
+}
+
+function compareAdjacentBlocks(color, x, y) {
+  blocks[x][y] = color;
+  [[1, 0], [0, 1], [-1, 0], [0, -1]].forEach(i => {
+    if (x + i[0] >= 0 && y + i[1] >= 0) {
+      if (blocks[x + i[0]][y + i[1]] == userColor) {
+        blocks[x + i[0]][y + i[1]] = color;
+        compareAdjacentBlocks(color, x + i[0], y + i[1])
+      }
+    }
+  });
 }
