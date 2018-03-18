@@ -1,9 +1,9 @@
-const w = 25;
-const h = 25;
+let w = h = 25;
 const scale = 15;
 let blocks = [];
 
 function setup() {
+  setCanvasSize();
   for (let x = 0; x < w; x++) {
     blocks.push([]);
     blocks.push(new Array(h));
@@ -12,7 +12,6 @@ function setup() {
     }    
   }
   createCanvas(w * scale, h * scale);
-  background(255, 128, 128);
   for (let x = 0; x < w; x++) {
     for (let y = 0; y < h; y++) {
       colorMode(RGB, 1);
@@ -24,5 +23,9 @@ function setup() {
 }
 
 function draw() {
+  
+}
 
+function setCanvasSize() {
+  (windowHeight > windowWidth) ? w = h = Math.floor(windowWidth/scale) : w = h = Math.floor(windowHeight/scale);
 }
